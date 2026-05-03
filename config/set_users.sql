@@ -1,0 +1,7 @@
+DROP USER IF EXISTS 'root'@'_gateway';
+DROP USER IF EXISTS 'root'@'%';
+
+CREATE USER 'root'@'%' IDENTIFIED BY 'Passw0rd1!';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
