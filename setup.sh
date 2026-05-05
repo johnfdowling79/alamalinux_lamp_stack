@@ -5,8 +5,10 @@ echo "install firewall"
 sudo dnf install -y firewalld
 sudo dnf install -y httpd
 sudo dnf install -y epel-release
-#sudo firewall-cmd --add-port=80/tcp --permanent
-#sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --add-port=80/tcp
+sudo firewall-cmd --add-port=3306/tcp
+sudo firewall-cmd --add-service=http
+sudo firewall-cmd --add-service=mysql
 
 echo "install php"
 sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm

@@ -1,15 +1,17 @@
 
+echo "start firewall"
+sudo firewall-cmd --add-port=80/tcp
+sudo firewall-cmd --add-port=3306/tcp
+sudo firewall-cmd --add-service=http
+sudo firewall-cmd --add-service=mysql
+sudo firewall-cmd --reload
+
 sudo setenforce 0
 sudo chmod 777 -R /var/www/html
 sudo chown vagrant:vagrant -R /var/www/html
 sudo chmod 777 -R  /run/php-fpm/www.sock
 sudo chown vagrant:vagrant /run/php-fpm/www.sock
 
-echo "start firewall"
-sudo firewall-cmd --add-port=80/tcp
-sudo firewall-cmd --add-port=3306/tcp
-sudo firewall-cmd --add-service=http
-sudo firewall-cmd --reload
 
 echo "copy apache config"
 sudo cp /mnt/config/httpd.conf /etc/httpd/conf/httpd.conf
@@ -28,6 +30,10 @@ sudo systemctl start httpd
 echo "run privilege on the database"
 mysql -u root -p'Passw0rd1!' < /mnt/config/set_users.sql
 
-sudo firewall-cmd --add-service=http
+
+echo "reset firewall"
+sudo firewall-cmd --add-port=80/tcp
 sudo firewall-cmd --add-port=3306/tcp
+sudo firewall-cmd --add-service=http
+sudo firewall-cmd --add-service=mysql
 echo "Finished"
